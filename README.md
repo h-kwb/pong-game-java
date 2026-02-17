@@ -1,4 +1,8 @@
-[**▶ Play Pong Game**](https://h-kwb.github.io/pong-game-java/)
+<p align="center">
+  <a href="https://h-kwb.github.io/pong-game-java/" target="_blank">
+    <img src="https://img.shields.io/badge/PLAY%20NOW-000000?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+</p>
 
 # Pong Game (Java)
 
