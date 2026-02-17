@@ -263,10 +263,10 @@ public class GamePanel extends JPanel implements ActionListener {
 	// タイトル画面
 	public void drawTitleScreen(Graphics g) {
 		g.setFont(new Font("Arial", Font.BOLD, 50));
-		g.drawString("PONG GAME", 200, 200);
+		g.drawString("PONG GAME", 245, 200);
 		
 		g.setFont(new Font("Arial", Font.PLAIN, 30));
-		g.drawString("Press ENTER", 240, 300);
+		g.drawString("Press ENTER", 250, 300);
 	}
 	
 	// 難易度選択画面
