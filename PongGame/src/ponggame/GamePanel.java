@@ -1,5 +1,6 @@
 package ponggame;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -188,7 +189,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			
 			// speed +
 			if (Math.abs(ballXSpeed) < MAX_SPEED) {
-				ballXSpeed = (int)(ballXSpeed * 1.1);
+				ballXSpeed = (int)(ballXSpeed * 1.4);
 			}
 		}
 		
@@ -197,18 +198,18 @@ public class GamePanel extends JPanel implements ActionListener {
 			
 			ballXSpeed = -Math.abs(ballXSpeed);
 			
-			int paddleCenterY = leftPaddle.y + leftPaddle.height / 2;
+			int paddleCenterY = rightPaddle.y + rightPaddle.height / 2;
 			int ballCenterY = ballY + 10;
 			
 			int distance = ballCenterY - paddleCenterY;
 			
-			double normalized = (double)distance / (leftPaddle.height / 2);
+			double normalized = (double)distance / (rightPaddle.height / 2);
 			
 			ballYSpeed = (int)(normalized * 5);
 			
 			// speed +
 			if (Math.abs(ballXSpeed) < MAX_SPEED) {
-				ballXSpeed = (int)(ballXSpeed * 1.1);
+				ballXSpeed = (int)(ballXSpeed * 1.4);
 			}
 		}
 		
@@ -242,7 +243,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void checkWinner() {
 		if (leftScore >= 3) {
 			gameOver = true;
-			winnerText = "PLAYER WINS!";
+			winnerText = "YOU WIN!!";
 		}
 		
 		if (rightScore >= 3) {
@@ -258,15 +259,17 @@ public class GamePanel extends JPanel implements ActionListener {
 		gameOver = false;
 		
 		resetBall();
+		
+		gameState = DIFFICULTY;
 	}
 	
 	// タイトル画面
 	public void drawTitleScreen(Graphics g) {
 		g.setFont(new Font("Arial", Font.BOLD, 50));
-		g.drawString("PONG GAME", 300, 200);
+		g.drawString("PONG GAME", 250, 200);
 		
 		g.setFont(new Font("Arial", Font.PLAIN, 30));
-		g.drawString("Press ENTER", 240, 300);
+		g.drawString("Press ENTER", 300, 300);
 	}
 	
 	// 難易度選択画面
@@ -297,11 +300,16 @@ public class GamePanel extends JPanel implements ActionListener {
 	    g.drawString(String.valueOf(rightScore), 460, 50);
 
 	    if (gameOver) {
+	    	g.setColor(Color.BLACK);
+	    	g.fillRect(0, 0, getWidth(), getHeight());
+	    	
+	    	g.setColor(Color.WHITE);
 	        g.setFont(new Font("Arial", Font.BOLD, 50));
-	        g.drawString(winnerText, 220, 300);
+	        g.drawString(winnerText, 250, 300);
 
 	        g.setFont(new Font("Arial", Font.PLAIN, 20));
 	        g.drawString("Press R to Restart", 300, 350);
+	        return;
 	    }
 	}
 }
