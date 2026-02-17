@@ -1,4 +1,4 @@
-package main;
+package ponggame;
 
 public class Main {
 
