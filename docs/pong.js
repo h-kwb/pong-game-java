@@ -165,7 +165,7 @@ function checkCollision(paddle, isLeft) {
     ballYSpeed = normalized * 5;
 
     if (Math.abs(ballXSpeed) < MAX_SPEED) {
-      ballXSpeed *= 1.4; // ← あなたが選んだ1.4倍
+      ballXSpeed *= 1.4; 
     }
   }
 }
@@ -241,7 +241,7 @@ function resetBall() {
 function checkWinner() {
   if (leftScore >= 3) {
     gameOver = true;
-    winnerText = "PLAYER WINS!";
+    winnerText = "YOU WIN!!";
   }
   if (rightScore >= 3) {
     gameOver = true;
