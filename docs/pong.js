@@ -120,11 +120,11 @@ function update() {
   }
 
   // 得点処理（テニス方式）
-  if (ballX <= 0) {
+  if (ballX <= -20) {
     scoreRight();
     resetBall();
   }
-  if (ballX >= canvas.width - 20) {
+  else if (ballX > canvas.width) {
     scoreLeft();
     resetBall();
   }
@@ -179,28 +179,26 @@ function scoreLeft() {
 }
 
 function scoreRight() {
-  // 40未満 → 普通に進行
+
   if (rightScoreIndex < 3) {
     rightScoreIndex++;
     return;
   }
 
-  // デュース状態
-  if (rightScoreIndex === 3 &&leftScoreIndex === 3) {
-    if (advantage === 1) {
-      // 左がアドバンテージ → ゲーム獲得
-      winGameRight();
-    } else if (advantage === 2) {
-      // 右のアドバンテージ → デュースに戻す
-      advantage = 0;
-    } else {
-      // デュース → 左がアドバンテージ
-      advantage = 1;
+  if (rightScoreIndex === 3 && leftScoreIndex === 3) {
+
+    if (advantage === 2) {
+      winGameRight();   // ← 右ADなら右がゲーム
+    }
+    else if (advantage === 1) {
+      advantage = 0;    // ← 左ADを打ち消す
+    }
+    else {
+      advantage = 2;    // ← 右がAD
     }
     return;
   }
 
-  // 左40 vs 右 < 40 → 左がゲーム
   if (rightScoreIndex === 3 && leftScoreIndex < 3) {
     winGameRight();
   }
@@ -221,6 +219,7 @@ function winGameLeft() {
   resetPoints();
   resetBall();
 }
+
 function winGameRight() {
   rightGames++;
 
