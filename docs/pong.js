@@ -119,13 +119,21 @@ function update() {
     ballYSpeed *= -1;
   }
 
-  // 得点処理（テニス方式）
-  if (ballX <= -20) {
-    scoreRight();
+  // 得点処理（進行方向ベース）
+  if (ballX < -20) {
+
+    if (ballXSpeed < 0) {
+      scoreRight();   // 左へ抜けた＝右の得点
+    }
+
     resetBall();
   }
   else if (ballX > canvas.width) {
-    scoreLeft();
+
+    if (ballXSpeed > 0) {
+      scoreLeft();    // 右へ抜けた＝左の得点
+    }
+
     resetBall();
   }
 
