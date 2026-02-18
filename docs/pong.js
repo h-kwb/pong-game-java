@@ -139,17 +139,14 @@ document.addEventListener("keydown", (e) => {
     wPressed = false;
     sPressed = false;
 
-
     return;
   }
-
 
   // ===== TITLE =====
   if (gameState === TITLE && e.key === "Enter") {
     gameState = DIFFICULTY;
     return;
   }
-
 
   // ===== DIFFICULTY =====
   if (gameState === DIFFICULTY) {
@@ -158,16 +155,20 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "3") { aiSpeed = 6; gameState = PLAY; return; }
   }
 
-
   // ===== PLAY操作 =====
-  if (e.key === "w") wPressed = false;
-  if (e.key === "s") sPressed = false;
-  
   if (gameState === PLAY && e.key === "w") wPressed = true;
   if (gameState === PLAY && e.key === "s") sPressed = true;
 
 
   if (e.key === "r" && gameOver) restartGame();
+});
+
+// keyup操作
+document.addEventListener("keyup", (e) => {
+
+  if (e.key === "w") wPressed = false;
+  if (e.key === "s") sPressed = false;
+
 });
 
 
