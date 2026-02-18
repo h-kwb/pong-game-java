@@ -4,6 +4,7 @@
 const TITLE = 0;
 const DIFFICULTY = 1;
 const PLAY = 2;
+const PAUSE = 3;
 
 let gameState = TITLE;
 
@@ -37,6 +38,14 @@ let sPressed = false;
 let server = 1;
 // 1 = Left
 // 2 = Right
+
+// PAUSE用変数
+let pauseMenuIndex = 0;
+
+const puseMenu = [
+  "RESUME",
+  "RESET MATCH"
+];
 
 // Canvas
 const canvas = document.getElementById("gameCanvas");
@@ -95,6 +104,40 @@ document.addEventListener("keydown", (e) => {
 
   if (e.key === "w") wPressed = true;
   if (e.key === "s") sPressed = true;
+
+  // ==== PAUSE =====
+  if (e.code === "Space" && gameState === PLAY) {
+    gameState = PAUSE;
+  }
+  else if (e.code === "Space" && gameState === PAUSE) {
+    gameState = PLAY;
+  }
+
+  if (gameState === PAUSE) {
+
+  if (e.key === "ArrowUp") {
+    pauseMenuIndex--;
+    if (pauseMenuIndex < 0) pauseMenuIndex = pauseMenu.length - 1;
+  }
+
+  if (e.key === "ArrowDown") {
+    pauseMenuIndex++;
+    if (pauseMenuIndex >= pauseMenu.length) pauseMenuIndex = 0;
+  }
+
+  if (e.key === "Enter") {
+
+    if (pauseMenuIndex === 0) {
+      gameState = PLAY;   // RESUME
+    }
+
+    if (pauseMenuIndex === 1) {
+      restartGame();      // RESET MATCH
+      gameState = TITLE;
+    }
+  }
+}
+
 
   if (e.key === "r" && gameOver) restartGame();
 });
@@ -363,6 +406,9 @@ function draw() {
     drawDifficulty();
   } else if (gameState === PLAY) {
     drawGame();
+  } else if (gameState === PAUSE) {
+    drawGame();
+    drawPause();
   }
 }
 
@@ -374,6 +420,33 @@ function drawTitle() {
   ctx.font = "30px Arial";
   ctx.fillText("Press ENTER", 300, 300);
 }
+
+function drawPause() {
+
+  // 背景を少し暗く
+  ctx.fillStyle = "rgba(0,0,0,0.6)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "white";
+  ctx.font = "50px Arial";
+  ctx.fillText("PAUSE", 300, 150);
+
+  ctx.font = "30px Arial";
+
+  for (let i = 0; i < pauseMenu.length; i++) {
+
+    if (i === pauseMenuIndex) {
+      ctx.fillText("> " + pauseMenu[i], 280, 250 + i * 50);
+    } else {
+      ctx.fillText(pauseMenu[i], 300, 250 + i * 50);
+    }
+  }
+
+  ctx.font = "20px Arial";
+  ctx.fillText("↑ ↓ : Select", 320, 400);
+  ctx.fillText("ENTER : Confirm", 300, 430);
+}
+
 
 // =====================
 // その他
