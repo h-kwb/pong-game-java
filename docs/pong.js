@@ -205,6 +205,7 @@ function drawGame() {
   ctx.fillStyle = "white";
 
   // 中央線
+  ctx.fillStyle = "white";
   for (let i = 0; i < canvas.height; i += 30) {
     ctx.fillRect(canvas.width / 2 - 2, i, 4, 20);
   }
@@ -212,18 +213,25 @@ function drawGame() {
   leftPaddle.draw();
   rightPaddle.draw();
 
-  ctx.fillRect(ballX, ballY, 20, 20);
+  ctx.beginPath();
+  ctx.arc(ballX + 10, ballY + 10, 10, 0, Math.PI * 2);
+  ctx.fill();
 
   ctx.font = "40px Arial";
   ctx.fillText(leftScore, 300, 50);
   ctx.fillText(rightScore, 460, 50);
 
   if (gameOver) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "white";
     ctx.font = "50px Arial";
     ctx.fillText(winnerText, 250, 300);
 
     ctx.font = "20px Arial";
     ctx.fillText("Press R to Restart", 300, 350);
+    return;
   }
 }
 
