@@ -92,61 +92,75 @@ let rightPaddle = new Paddle(760, 250);
 // キー入力
 // =====================
 document.addEventListener("keydown", (e) => {
-  if (gameState === TITLE && e.key === "Enter") {
-    gameState = DIFFICULTY;
-  }
 
-  if (gameState === DIFFICULTY) {
-    if (e.key === "1") { aiSpeed = 2; gameState = PLAY; }
-    if (e.key === "2") { aiSpeed = 4; gameState = PLAY; }
-    if (e.key === "3") { aiSpeed = 6; gameState = PLAY; }
-  }
-
-  if (gameState === PLAY && e.key === "w") wPressed = true;
-  if (gameState === PLAY && e.key === "s") sPressed = true;
-
-  // ==== PAUSE =====
-  if (e.key.toLowerCase() === "p") {
-
-    if (gameState === PLAY) gameState = PAUSE;
-    else if (gameState === PAUSE) gameState = PLAY;
-
-    return;
-  }
-
+  // ===== PAUSE最優先 =====
   if (gameState === PAUSE) {
+
+    if (e.key.toLowerCase() === "p") {
+      gameState = PLAY;
+      return;
+    }
 
     if (e.key === "ArrowUp") {
       pauseMenuIndex--;
       if (pauseMenuIndex < 0) pauseMenuIndex = pauseMenu.length - 1;
+      return;
     }
 
     if (e.key === "ArrowDown") {
       pauseMenuIndex++;
       if (pauseMenuIndex >= pauseMenu.length) pauseMenuIndex = 0;
+      return;
     }
 
     if (e.key === "Enter") {
 
       if (pauseMenuIndex === 0) {
-        gameState = PLAY;   // RESUME
+        gameState = PLAY;
+        return;
       }
 
       if (pauseMenuIndex === 1) {
-        restartGame();      // RESET MATCH
+        restartGame();
         gameState = TITLE;
+        return;
       }
     }
-}
+
+    return; // ← Pause中は他の入力を完全遮断
+  }
+
+
+  // ===== PLAY中のPause =====
+  if (gameState === PLAY && e.key.toLowerCase() === "p") {
+    gameState = PAUSE;
+    return;
+  }
+
+
+  // ===== TITLE =====
+  if (gameState === TITLE && e.key === "Enter") {
+    gameState = DIFFICULTY;
+    return;
+  }
+
+
+  // ===== DIFFICULTY =====
+  if (gameState === DIFFICULTY) {
+    if (e.key === "1") { aiSpeed = 2; gameState = PLAY; return; }
+    if (e.key === "2") { aiSpeed = 4; gameState = PLAY; return; }
+    if (e.key === "3") { aiSpeed = 6; gameState = PLAY; return; }
+  }
+
+
+  // ===== PLAY操作 =====
+  if (gameState === PLAY && e.key === "w") wPressed = true;
+  if (gameState === PLAY && e.key === "s") sPressed = true;
 
 
   if (e.key === "r" && gameOver) restartGame();
 });
 
-document.addEventListener("keyup", (e) => {
-  if (e.key === "w") wPressed = false;
-  if (e.key === "s") sPressed = false;
-});
 
 // =====================
 // ゲームループ
