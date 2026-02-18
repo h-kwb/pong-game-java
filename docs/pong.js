@@ -151,58 +151,57 @@ function update() {
 // 得点処理（テニス方式）
 // =====================
 function scoreLeft() {
-  // 40未満 → 普通に進行
-  if (leftScoreIndex < 3) {
-    leftScoreIndex++;
-    return;
-  }
 
-  // デュース状態
+  // ===== 40以上の世界（Deuce以降）=====
   if (leftScoreIndex === 3 && rightScoreIndex === 3) {
+
     if (advantage === 1) {
-      // 左がアドバンテージ → ゲーム獲得
       winGameLeft();
-    } else if (advantage === 2) {
-      // 右のアドバンテージ → デュースに戻す
+    }
+    else if (advantage === 2) {
       advantage = 0;
-    } else {
-      // デュース → 左がアドバンテージ
+    }
+    else {
       advantage = 1;
     }
     return;
   }
 
-  // 左40 vs 右 < 40 → 左がゲーム
-  if (leftScoreIndex === 3 && rightScoreIndex < 3) {
+  // ===== 通常ポイント進行 =====
+  if (leftScoreIndex < 3) {
+    leftScoreIndex++;
+  }
+  else {
     winGameLeft();
   }
 }
 
 function scoreRight() {
 
-  if (rightScoreIndex < 3) {
-    rightScoreIndex++;
-    return;
-  }
-
-  if (rightScoreIndex === 3 && leftScoreIndex === 3) {
+  // ===== 40以上の世界（Deuce以降）=====
+  if (leftScoreIndex === 3 && rightScoreIndex === 3) {
 
     if (advantage === 2) {
-      winGameRight();   // ← 右ADなら右がゲーム
+      winGameRight();
     }
     else if (advantage === 1) {
-      advantage = 0;    // ← 左ADを打ち消す
+      advantage = 0;
     }
     else {
-      advantage = 2;    // ← 右がAD
+      advantage = 2;
     }
     return;
   }
 
-  if (rightScoreIndex === 3 && leftScoreIndex < 3) {
+  // ===== 通常ポイント進行 =====
+  if (rightScoreIndex < 3) {
+    rightScoreIndex++;
+  }
+  else {
     winGameRight();
   }
 }
+
 
 // Setロジック
 function winGameLeft() {
