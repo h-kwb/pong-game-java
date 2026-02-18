@@ -17,8 +17,14 @@ let ballYSpeed = 3;
 
 const MAX_SPEED = 10;
 
-let leftScore = 0;
-let rightScore = 0;
+// ★ テニススコア方式
+const tennisScores = [0, 15, 30, 40];
+let leftScoreIndex = 0;
+let rightScoreIndex = 0;
+let advantage = 0; // 0 = なし, 1 = 左のアドバンテージ, 2 = 右がアドバンテージ
+let leftGames = 0;
+let rightGames = 0;
+const GAME_WIN = 6; // 6ゲーム先取
 
 let gameOver = false;
 let winnerText = "";
@@ -113,15 +119,13 @@ function update() {
     ballYSpeed *= -1;
   }
 
-  // 得点
+  // 得点処理（テニス方式）
   if (ballX <= 0) {
-    rightScore++;
-    checkWinner();
+    scoreRight();
     resetBall();
   }
   if (ballX >= canvas.width - 20) {
-    leftScore++;
-    checkWinner();
+    scoreLeft();
     resetBall();
   }
 
@@ -142,6 +146,103 @@ function update() {
     if (ballCenter > paddleCenter) rightPaddle.y += aiSpeed;
   }
 }
+
+// =====================
+// 得点処理（テニス方式）
+// =====================
+function scoreLeft() {
+  // 40未満 → 普通に進行
+  if (leftScoreIndex < 3) {
+    leftScoreIndex++;
+    return;
+  }
+
+  // デュース状態
+  if (leftScoreIndex === 3 && rightScoreIndex === 3) {
+    if (advantage === 1) {
+      // 左がアドバンテージ → ゲーム獲得
+      winGameLeft();
+    } else if (advantage === 2) {
+      // 右のアドバンテージ → デュースに戻す
+      advantage = 0;
+    } else {
+      // デュース → 左がアドバンテージ
+      advantage = 1;
+    }
+    return;
+  }
+
+  // 左40 vs 右 < 40 → 左がゲーム
+  if (leftScoreIndex === 3 && rightScoreIndex < 3) {
+    winGameLeft();
+  }
+}
+
+function scoreRight() {
+  // 40未満 → 普通に進行
+  if (rightScoreIndex < 3) {
+    rightScoreIndex++;
+    return;
+  }
+
+  // デュース状態
+  if (rightScoreIndex === 3 &&leftScoreIndex === 3) {
+    if (advantage === 1) {
+      // 左がアドバンテージ → ゲーム獲得
+      winGameRight();
+    } else if (advantage === 2) {
+      // 右のアドバンテージ → デュースに戻す
+      advantage = 0;
+    } else {
+      // デュース → 左がアドバンテージ
+      advantage = 1;
+    }
+    return;
+  }
+
+  // 左40 vs 右 < 40 → 左がゲーム
+  if (rightScoreIndex === 3 && leftScoreIndex < 3) {
+    winGameRight();
+  }
+}
+
+// Setロジック
+function winGameLeft() {
+  leftGames++;
+
+  // 試合終了
+  if (leftGames >= GAME_WIN) {
+    gameOver = true;
+    winnerText = "MATCH WINNER: YOU!!";
+    return;
+  }
+
+  // 次のゲームへ
+  resetPoints();
+  resetBall();
+}
+function winGameRight() {
+  rightGames++;
+
+  // 試合終了
+  if (rightGames >= GAME_WIN) {
+    gameOver = true;
+    winnerText = "MATCH WINNER: CPU!!";
+    return;
+  }
+
+  // 次のゲームへ
+  resetPoints();
+  resetBall();
+}
+
+// ポイントリセット関数
+function resetPoints() {
+  leftScoreIndex = 0;
+  rightScoreIndex = 0;
+  advantage = 0;
+}
+
 
 // =====================
 // 衝突処理
@@ -173,21 +274,56 @@ function checkCollision(paddle, isLeft) {
 // =====================
 // 画面描画
 // =====================
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  if (gameState === TITLE) return drawTitle();
-  if (gameState === DIFFICULTY) return drawDifficulty();
-  if (gameState === PLAY) return drawGame();
-}
-
-function drawTitle() {
+function drawGame() {
   ctx.fillStyle = "white";
-  ctx.font = "50px Arial";
-  ctx.fillText("PONG GAME", 250, 200);
-
   ctx.font = "30px Arial";
-  ctx.fillText("Press ENTER", 300, 300);
+  ctx.fillText(`Games: ${leftGames}`, 250, 90);
+  ctx.fillText(`Games: ${rightGames}`, 450, 90);
+
+
+
+  // 中央線
+  for (let i = 0; i < canvas.height; i += 30) {
+    ctx.fillRect(canvas.width / 2 - 2, i, 4, 20);
+  }
+
+  leftPaddle.draw();
+  rightPaddle.draw();
+
+  ctx.beginPath();
+  ctx.arc(ballX + 10, ballY + 10, 10, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.font = "40px Arial";
+
+  // ★ デュース・アドバンテージ表示
+  if (leftScoreIndex === 3 && rightScoreIndex === 3) {
+    if (advantage === 1) {
+      ctx.fillText("AD", 300, 50);
+      ctx.fillText("40", 460, 50);
+    } else if (advantage === 2) {
+      ctx.fillText("40", 300, 50);
+      ctx.fillText("AD", 460, 50);
+    } else {
+      ctx.fillText("DEUCE", 330, 50);
+    }
+  } else {
+    ctx.fillText(tennisScores[leftScoreIndex], 300, 50);
+    ctx.fillText(tennisScores[rightScoreIndex], 460, 50);
+  }
+
+  if (gameOver) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "white";
+    ctx.font = "50px Arial";
+    ctx.fillText(winnerText, 200, 300);
+
+    ctx.font = "20px Arial";
+    ctx.fillText("Press R to Restart Match", 260, 350);
+    return;
+  }
 }
 
 function drawDifficulty() {
@@ -205,7 +341,6 @@ function drawGame() {
   ctx.fillStyle = "white";
 
   // 中央線
-  ctx.fillStyle = "white";
   for (let i = 0; i < canvas.height; i += 30) {
     ctx.fillRect(canvas.width / 2 - 2, i, 4, 20);
   }
@@ -217,9 +352,10 @@ function drawGame() {
   ctx.arc(ballX + 10, ballY + 10, 10, 0, Math.PI * 2);
   ctx.fill();
 
+  // ★ テニススコア表示
   ctx.font = "40px Arial";
-  ctx.fillText(leftScore, 300, 50);
-  ctx.fillText(rightScore, 460, 50);
+  ctx.fillText(tennisScores[leftScoreIndex], 300, 50);
+  ctx.fillText(tennisScores[rightScoreIndex], 460, 50);
 
   if (gameOver) {
     ctx.fillStyle = "black";
@@ -246,20 +382,14 @@ function resetBall() {
   ballYSpeed = Math.random() < 0.5 ? 3 : -3;
 }
 
-function checkWinner() {
-  if (leftScore >= 3) {
-    gameOver = true;
-    winnerText = "YOU WIN!!";
-  }
-  if (rightScore >= 3) {
-    gameOver = true;
-    winnerText = "YOU LOSE!";
-  }
-}
-
 function restartGame() {
-  leftScore = 0;
-  rightScore = 0;
+  leftScoreIndex = 0;
+  rightScoreIndex = 0;
+  advantage = 0;
+
+  leftGames = 0;
+  rightGames = 0;
+
   gameOver = false;
   resetBall();
   gameState = DIFFICULTY;
