@@ -102,14 +102,14 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "3") { aiSpeed = 6; gameState = PLAY; }
   }
 
-  if (e.key === "w") wPressed = true;
-  if (e.key === "s") sPressed = true;
+  if (gameState === PLAY && e.key === "w") wPressed = true;
+  if (gameState === PLAY && e.key === "s") sPressed = true;
 
   // ==== PAUSE =====
-  if (e.code === "Space" && gameState === PLAY) {
+  if (e.code === "p" && gameState === PLAY) {
     gameState = PAUSE;
   }
-  else if (e.code === "Space" && gameState === PAUSE) {
+  else if (e.code === "p" && gameState === PAUSE) {
     gameState = PLAY;
   }
 
