@@ -114,27 +114,29 @@ document.addEventListener("keydown", (e) => {
     return;
   }
 
-  if (e.key === "ArrowUp") {
-    pauseMenuIndex--;
-    if (pauseMenuIndex < 0) pauseMenuIndex = pauseMenu.length - 1;
-  }
+  if (gameState === PAUSE) {
 
-  if (e.key === "ArrowDown") {
-    pauseMenuIndex++;
-    if (pauseMenuIndex >= pauseMenu.length) pauseMenuIndex = 0;
-  }
-
-  if (e.key === "Enter") {
-
-    if (pauseMenuIndex === 0) {
-      gameState = PLAY;   // RESUME
+    if (e.key === "ArrowUp") {
+      pauseMenuIndex--;
+      if (pauseMenuIndex < 0) pauseMenuIndex = pauseMenu.length - 1;
     }
 
-    if (pauseMenuIndex === 1) {
-      restartGame();      // RESET MATCH
-      gameState = TITLE;
+    if (e.key === "ArrowDown") {
+      pauseMenuIndex++;
+      if (pauseMenuIndex >= pauseMenu.length) pauseMenuIndex = 0;
     }
-  }
+
+    if (e.key === "Enter") {
+
+      if (pauseMenuIndex === 0) {
+        gameState = PLAY;   // RESUME
+      }
+
+      if (pauseMenuIndex === 1) {
+        restartGame();      // RESET MATCH
+        gameState = TITLE;
+      }
+    }
 }
 
 
