@@ -114,8 +114,6 @@ document.addEventListener("keydown", (e) => {
     return;
   }
 
-  if (gameState === PAUSE) {
-
   if (e.key === "ArrowUp") {
     pauseMenuIndex--;
     if (pauseMenuIndex < 0) pauseMenuIndex = pauseMenu.length - 1;
