@@ -33,6 +33,11 @@ let winnerText = "";
 let wPressed = false;
 let sPressed = false;
 
+// サーブ権
+let server = 1;
+// 1 = Left
+// 2 = Right
+
 // Canvas
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -215,10 +220,13 @@ function scoreRight() {
 function winGameLeft() {
   leftGames++;
 
+  // サーバー交代
+  server = (server === 1) ? 2 : 1;
+
   // 試合終了
   if (leftGames >= GAME_WIN) {
     gameOver = true;
-    winnerText = "MATCH WINNER: YOU!!";
+    winnerText = "YOU WIN!!";
     return;
   }
 
@@ -230,10 +238,13 @@ function winGameLeft() {
 function winGameRight() {
   rightGames++;
 
+  // サーバー交代（←これ追加）
+  server = (server === 1) ? 2 : 1;
+
   // 試合終了
   if (rightGames >= GAME_WIN) {
     gameOver = true;
-    winnerText = "MATCH WINNER: CPU!!";
+    winnerText = "YOU LOSE!";
     return;
   }
 
@@ -371,11 +382,20 @@ function resetBall() {
   ballX = canvas.width / 2;
   ballY = canvas.height / 2;
 
-  ballXSpeed = Math.random() < 0.5 ? 3 : -3;
+  // サーバー側に向かって打ち出す
+  if (server === 1) {
+    ballXSpeed = 3;   // 左サーブ → 右へ
+  } else {
+    ballXSpeed = -3;  // 右サーブ → 左へ
+  }
+
   ballYSpeed = Math.random() < 0.5 ? 3 : -3;
 }
 
 function restartGame() {
+
+  server = 1; // ← 最初はプレイヤーサーブ
+
   leftScoreIndex = 0;
   rightScoreIndex = 0;
   advantage = 0;
