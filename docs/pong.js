@@ -337,6 +337,27 @@ function drawDifficulty() {
   ctx.fillText("3 : HARD", 250, 350);
 }
 
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (gameState === TITLE) {
+    drawTitle();
+  } else if (gameState === DIFFICULTY) {
+    drawDifficulty();
+  } else if (gameState === PLAY) {
+    drawGame();
+  }
+}
+
+function drawTitle() {
+  ctx.fillStyle = "white";
+  ctx.font = "50px Arial";
+  ctx.fillText("PONG GAME", 250, 200);
+
+  ctx.font = "30px Arial";
+  ctx.fillText("Press ENTER", 300, 300);
+}
+
 // =====================
 // その他
 // =====================
