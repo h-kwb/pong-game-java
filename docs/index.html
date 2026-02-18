@@ -6,19 +6,33 @@
   <style>
     body {
       background-color: bisque;
+      text-align: center;
     }
     canvas {
       background: black;
       display: block;
-      margin: auto;
+      margin: 20px auto;
     }
   </style>
 </head>
 <body>
-  <p>Pong game!</p>
-  <p>世界で最初に誕生したといわれるコンピューターゲームです</p>
-  <p>操作は簡単！</p>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
-  <script src="pong.js"></script>
+  <div style="display: block;">
+    <canvas id="gameCanvas" width="480" height="320" tabindex="1"></canvas>
+    <script src="pong.js"></script>
+    <p>Pong game!</p>
+    <p>世界で最初に誕生したといわれるコンピューターゲームです</p>
+    <p>
+      操作は簡単！<br>
+      Wキー : ↑<br>
+      Sキー : ↓<br>
+      Pキー : PAUSE<br>
+      Enter : START<br><br>
+
+      CPUの難易度は3段階<br>
+      1 : EASY<br>
+      2 : NORMAL<br>
+      3 : HARD<br>
+    </p>
+  </div>
 </body>
 </html>

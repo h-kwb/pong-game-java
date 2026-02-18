@@ -1,6 +1,16 @@
 // =====================
 // 定数・ゲームステート
 // =====================
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.focus();
+
+canvas.addEventListener("click", () => {
+  canvas.focus();
+});
+
+
 const TITLE = 0;
 const DIFFICULTY = 1;
 const PLAY = 2;
@@ -46,10 +56,6 @@ const pauseMenu = [
   "RESUME",
   "RESET MATCH"
 ];
-
-// Canvas
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
 
 // =====================
 // Paddle クラス
