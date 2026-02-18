@@ -3,36 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <title>Pong Game</title>
+
   <style>
     body {
       background-color: bisque;
-      text-align: center;
+      margin: 0;
+      font-family: Arial;
     }
+
+    /* ===== 横並びレイアウト ===== */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      margin-top: 30px;
+    }
+
     canvas {
       background: black;
-      display: block;
-      margin: 20px auto;
     }
+
+    /* ===== 説明欄 ===== */
+    .info {
+      width: 250px;
+      text-align: left;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
   </style>
 </head>
-<body>
-  <div style="display: block;">
-    <canvas id="gameCanvas" width="480" height="320" tabindex="1"></canvas>
-    <script src="pong.js"></script>
-    <p>Pong game!</p>
-    <p>世界で最初に誕生したといわれるコンピューターゲームです</p>
-    <p>
-      操作は簡単！<br>
-      Wキー : ↑<br>
-      Sキー : ↓<br>
-      Pキー : PAUSE<br>
-      Enter : START<br><br>
 
-      CPUの難易度は3段階<br>
-      1 : EASY<br>
-      2 : NORMAL<br>
-      3 : HARD<br>
-    </p>
+<body>
+
+<div class="container">
+
+  <!-- ゲーム -->
+  <canvas id="gameCanvas" width="600" height="400" tabindex="1"></canvas>
+
+  <!-- 説明 -->
+  <div class="info">
+    <h2>Pong Game</h2>
+
+    <p>世界で最初に誕生したといわれる<br>
+    コンピューターゲームです</p>
+
+    <h3>操作方法</h3>
+    Wキー : ↑<br>
+    Sキー : ↓<br>
+    Pキー : PAUSE<br>
+    Enter : START<br><br>
+
+    <h3>難易度</h3>
+    1 : EASY<br>
+    2 : NORMAL<br>
+    3 : HARD<br>
   </div>
+
+</div>
+
+<script src="pong.js"></script>
+
 </body>
 </html>

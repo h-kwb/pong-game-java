@@ -10,6 +10,13 @@ canvas.addEventListener("click", () => {
   canvas.focus();
 });
 
+function cx(percent) {
+  return canvas.width * percent;
+}
+
+function cy(percent) {
+  return canvas.height * percent;
+}
 
 const TITLE = 0;
 const DIFFICULTY = 1;
@@ -367,11 +374,10 @@ function checkCollision(paddle, isLeft) {
 // =====================
 function drawGame() {
   ctx.fillStyle = "white";
-  ctx.font = "30px Arial";
-  ctx.fillText(`Games: ${leftGames}`, 250, 90);
-  ctx.fillText(`Games: ${rightGames}`, 450, 90);
+  ctx.textAlign = "center";
 
-
+  ctx.fillText(`Games: ${leftGames}`, cx(0.3), cy(0.1));
+  ctx.fillText(`Games: ${rightGames}`, cx(0.7), cy(0.1));
 
   // 中央線
   for (let i = 0; i < canvas.height; i += 30) {
@@ -390,17 +396,17 @@ function drawGame() {
   // ★ デュース・アドバンテージ表示
   if (leftScoreIndex === 3 && rightScoreIndex === 3) {
     if (advantage === 1) {
-      ctx.fillText("AD", 300, 50);
-      ctx.fillText("40", 460, 50);
+      ctx.fillText(tennisScores[leftScoreIndex], cx(0.4), cy(0.08));
+      ctx.fillText(tennisScores[rightScoreIndex], cx(0.6), cy(0.08));
     } else if (advantage === 2) {
-      ctx.fillText("40", 300, 50);
-      ctx.fillText("AD", 460, 50);
+      ctx.fillText("40", cx(0.4), cy(0.08));
+      ctx.fillText("AD", cx(0.6), cy(0.08));
     } else {
-      ctx.fillText("DEUCE", 330, 50);
+      ctx.fillText("DEUCE", cx(0.5), cy(0.08));
     }
   } else {
-    ctx.fillText(tennisScores[leftScoreIndex], 300, 50);
-    ctx.fillText(tennisScores[rightScoreIndex], 460, 50);
+    ctx.fillText(tennisScores[leftScoreIndex], cx(0.4), cy(0.08));
+    ctx.fillText(tennisScores[rightScoreIndex], cx(0.6), cy(0.08));
   }
 
   if (gameOver) {
@@ -409,23 +415,25 @@ function drawGame() {
 
     ctx.fillStyle = "white";
     ctx.font = "50px Arial";
-    ctx.fillText(winnerText, 200, 300);
+    ctx.fillText(winnerText, cx(0.4), cy(0.5));
 
     ctx.font = "20px Arial";
-    ctx.fillText("Press R to Restart Match", 260, 350);
+    ctx.fillText("Press R to Restart Match", cx(0.45), cy(0.525));
     return;
   }
 }
 
 function drawDifficulty() {
   ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+
   ctx.font = "40px Arial";
-  ctx.fillText("SELECT DIFFICULTY", 150, 150);
+  ctx.fillText("SELECT DIFFICULTY", cx(0.5), cy(0.25));
 
   ctx.font = "30px Arial";
-  ctx.fillText("1 : EASY", 250, 250);
-  ctx.fillText("2 : NORMAL", 250, 300);
-  ctx.fillText("3 : HARD", 250, 350);
+  ctx.fillText("1 : EASY", cx(0.5), cy(0.45));
+  ctx.fillText("2 : NORMAL", cx(0.5), cy(0.55));
+  ctx.fillText("3 : HARD", cx(0.5), cy(0.65));
 }
 
 function draw() {
@@ -445,11 +453,13 @@ function draw() {
 
 function drawTitle() {
   ctx.fillStyle = "white";
+  ctx.textAlign = "center";
+
   ctx.font = "50px Arial";
-  ctx.fillText("PONG GAME", 250, 200);
+  ctx.fillText("PONG GAME", cx(0.5), cy(0.4));
 
   ctx.font = "30px Arial";
-  ctx.fillText("Press ENTER", 300, 300);
+  ctx.fillText("Press ENTER", cx(0.5), cy(0.6));
 }
 
 function drawPause() {
@@ -458,24 +468,24 @@ function drawPause() {
   ctx.fillStyle = "rgba(0,0,0,0.6)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "white";
+  ctx.textAlign = "center";
   ctx.font = "50px Arial";
-  ctx.fillText("PAUSE", 300, 150);
+  ctx.fillText("PAUSE", cx(0.5), cy(0.25));
 
   ctx.font = "30px Arial";
 
   for (let i = 0; i < pauseMenu.length; i++) {
 
     if (i === pauseMenuIndex) {
-      ctx.fillText("> " + pauseMenu[i], 280, 250 + i * 50);
+      ctx.fillText("> " + pauseMenu[i], cx(0.5), cy(0.5 + i * 0.1));
     } else {
-      ctx.fillText(pauseMenu[i], 300, 250 + i * 50);
+      ctx.fillText(pauseMenu[i], cx(0.5), cy(0.5 + i * 0.1));
     }
   }
 
   ctx.font = "20px Arial";
-  ctx.fillText("W S : Select", 320, 400);
-  ctx.fillText("ENTER : Confirm", 300, 430);
+  ctx.fillText("W S : Select", cx(0.5), cy(0.6));
+  ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.6));
 }
 
 
