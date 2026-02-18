@@ -380,6 +380,7 @@ function checkCollision(paddle, isLeft) {
 // 画面描画
 // =====================
 function drawGame() {
+  const w = canvas.width;
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
 
@@ -398,7 +399,7 @@ function drawGame() {
   ctx.arc(ballX + 10, ballY + 10, 10, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.font = "40px Arial";
+  ctx.font = `${w * 0.04}px Arial`;
 
   // ★ デュース・アドバンテージ表示
   if (leftScoreIndex === 3 && rightScoreIndex === 3) {
@@ -421,26 +422,30 @@ function drawGame() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "white";
-    ctx.font = "50px Arial";
+    ctx.font = `${w * 0.06}px Arial`;
     ctx.fillText(winnerText, cx(0.4), cy(0.5));
 
-    ctx.font = "20px Arial";
+    ctx.font = `${w * 0.02}px Arial`;
     ctx.fillText("Press R to Restart Match", cx(0.45), cy(0.525));
     return;
   }
 }
 
 function drawDifficulty() {
+  const w = canvas.width;
+  const h = canvas.height;
+
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
 
-  ctx.font = "40px Arial";
-  ctx.fillText("SELECT DIFFICULTY", cx(0.5), cy(0.25));
+  // title
+  ctx.font = `${w * 0.06}px Arial`;
+  ctx.fillText("SELECT DIFFICULTY", w / 2, h * 0.3);
 
-  ctx.font = "30px Arial";
-  ctx.fillText("1 : EASY", cx(0.5), cy(0.45));
-  ctx.fillText("2 : NORMAL", cx(0.5), cy(0.55));
-  ctx.fillText("3 : HARD", cx(0.5), cy(0.65));
+  ctx.font = `${w * 0.04}px Arial`;
+  ctx.fillText("1 : EASY",   w / 2, h * 0.55);
+  ctx.fillText("2 : NORMAL", w / 2, h * 0.65);
+  ctx.fillText("3 : HARD",   w / 2, h * 0.75);
 }
 
 function draw() {
@@ -459,27 +464,31 @@ function draw() {
 }
 
 function drawTitle() {
+  const w = canvas.width;
+  
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
 
-  ctx.font = "50px Arial";
+  ctx.font = `${w * 0.06}px Arial`;
   ctx.fillText("PONG GAME", cx(0.5), cy(0.4));
 
-  ctx.font = "30px Arial";
+  ctx.font = `${w * 0.02}px Arial`;
   ctx.fillText("Press ENTER", cx(0.5), cy(0.6));
 }
 
 function drawPause() {
+  const w = canvas.width;
 
   // 背景を少し暗く
   ctx.fillStyle = "rgba(0,0,0,0.6)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  ctx.fillStyle = "white";
   ctx.textAlign = "center";
-  ctx.font = "50px Arial";
+  ctx.font = `${w * 0.06}px Arial`;
   ctx.fillText("PAUSE", cx(0.5), cy(0.25));
 
-  ctx.font = "30px Arial";
+  ctx.font = `${w * 0.02}px Arial`;
 
   for (let i = 0; i < pauseMenu.length; i++) {
 
@@ -490,7 +499,7 @@ function drawPause() {
     }
   }
 
-  ctx.font = "20px Arial";
+  ctx.font = `${w * 0.02}px Arial`;
   ctx.fillText("W S : Select", cx(0.5), cy(0.6));
   ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.6));
 }
