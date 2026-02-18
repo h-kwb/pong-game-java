@@ -98,8 +98,15 @@ class Paddle {
   }
 }
 
-let leftPaddle = new Paddle(20, 250);
-let rightPaddle = new Paddle(760, 250);
+let leftPaddle = new Paddle(
+  canvas.width * 0.03,
+  canvas.height / 2 - 50
+);
+
+let rightPaddle = new Paddle(
+  canvas.width - canvas.width * 0.03 - 20,
+  canvas.height / 2 - 50
+);
 
 // =====================
 // キー入力
@@ -376,8 +383,8 @@ function drawGame() {
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
 
-  ctx.fillText(`Games: ${leftGames}`, cx(0.3), cy(0.1));
-  ctx.fillText(`Games: ${rightGames}`, cx(0.7), cy(0.1));
+  ctx.fillText(`Games: ${leftGames}`, cx(0.35), cy(0.15));
+  ctx.fillText(`Games: ${rightGames}`, cx(0.65), cy(0.15));
 
   // 中央線
   for (let i = 0; i < canvas.height; i += 30) {
