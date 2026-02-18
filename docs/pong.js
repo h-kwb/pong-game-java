@@ -42,7 +42,7 @@ let server = 1;
 // PAUSE用変数
 let pauseMenuIndex = 0;
 
-const puseMenu = [
+const pauseMenu = [
   "RESUME",
   "RESET MATCH"
 ];
@@ -134,6 +134,12 @@ document.addEventListener("keydown", (e) => {
   // ===== PLAY中のPause =====
   if (gameState === PLAY && e.key.toLowerCase() === "p") {
     gameState = PAUSE;
+
+    // 押しっぱなし防止
+    wPressed = false;
+    sPressed = false;
+
+
     return;
   }
 
@@ -154,6 +160,9 @@ document.addEventListener("keydown", (e) => {
 
 
   // ===== PLAY操作 =====
+  if (e.key === "w") wPressed = false;
+  if (e.key === "s") sPressed = false;
+  
   if (gameState === PLAY && e.key === "w") wPressed = true;
   if (gameState === PLAY && e.key === "s") sPressed = true;
 
