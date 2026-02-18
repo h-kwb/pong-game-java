@@ -337,40 +337,6 @@ function drawDifficulty() {
   ctx.fillText("3 : HARD", 250, 350);
 }
 
-function drawGame() {
-  ctx.fillStyle = "white";
-
-  // 中央線
-  for (let i = 0; i < canvas.height; i += 30) {
-    ctx.fillRect(canvas.width / 2 - 2, i, 4, 20);
-  }
-
-  leftPaddle.draw();
-  rightPaddle.draw();
-
-  ctx.beginPath();
-  ctx.arc(ballX + 10, ballY + 10, 10, 0, Math.PI * 2);
-  ctx.fill();
-
-  // ★ テニススコア表示
-  ctx.font = "40px Arial";
-  ctx.fillText(tennisScores[leftScoreIndex], 300, 50);
-  ctx.fillText(tennisScores[rightScoreIndex], 460, 50);
-
-  if (gameOver) {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "white";
-    ctx.font = "50px Arial";
-    ctx.fillText(winnerText, 250, 300);
-
-    ctx.font = "20px Arial";
-    ctx.fillText("Press R to Restart", 300, 350);
-    return;
-  }
-}
-
 // =====================
 // その他
 // =====================
