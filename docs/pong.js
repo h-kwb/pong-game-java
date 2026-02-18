@@ -101,13 +101,13 @@ document.addEventListener("keydown", (e) => {
       return;
     }
 
-    if (e.key === "ArrowUp") {
+    if (e.key === "w") {
       pauseMenuIndex--;
       if (pauseMenuIndex < 0) pauseMenuIndex = pauseMenu.length - 1;
       return;
     }
 
-    if (e.key === "ArrowDown") {
+    if (e.key === "s") {
       pauseMenuIndex++;
       if (pauseMenuIndex >= pauseMenu.length) pauseMenuIndex = 0;
       return;
