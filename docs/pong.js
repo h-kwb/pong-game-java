@@ -468,7 +468,7 @@ function drawPause() {
   }
 
   ctx.font = "20px Arial";
-  ctx.fillText("↑ ↓ : Select", 320, 400);
+  ctx.fillText("W S : Select", 320, 400);
   ctx.fillText("ENTER : Confirm", 300, 430);
 }
 
