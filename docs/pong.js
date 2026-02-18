@@ -423,10 +423,10 @@ function drawGame() {
 
     ctx.fillStyle = "white";
     ctx.font = `${w * 0.06}px Arial`;
-    ctx.fillText(winnerText, cx(0.4), cy(0.5));
+    ctx.fillText(winnerText, cx(0.5), cy(0.5));
 
-    ctx.font = `${w * 0.02}px Arial`;
-    ctx.fillText("Press R to Restart Match", cx(0.45), cy(0.525));
+    ctx.font = `${w * 0.03}px Arial`;
+    ctx.fillText("Press R to Restart Match", cx(0.45), cy(0.55));
     return;
   }
 }
@@ -443,9 +443,9 @@ function drawDifficulty() {
   ctx.fillText("SELECT DIFFICULTY", w / 2, h * 0.3);
 
   ctx.font = `${w * 0.04}px Arial`;
-  ctx.fillText("1 : EASY",   w / 2, h * 0.55);
+  ctx.fillText("1 : EASY",   w / 1.75, h * 0.55);
   ctx.fillText("2 : NORMAL", w / 2, h * 0.65);
-  ctx.fillText("3 : HARD",   w / 2, h * 0.75);
+  ctx.fillText("3 : HARD",   w / 1.75, h * 0.75);
 }
 
 function draw() {
@@ -472,7 +472,7 @@ function drawTitle() {
   ctx.font = `${w * 0.06}px Arial`;
   ctx.fillText("PONG GAME", cx(0.5), cy(0.4));
 
-  ctx.font = `${w * 0.02}px Arial`;
+  ctx.font = `${w * 0.03}px Arial`;
   ctx.fillText("Press ENTER", cx(0.5), cy(0.6));
 }
 
@@ -503,9 +503,9 @@ function drawPause() {
   }
 
   // ===== 操作説明ゾーン =====
-  ctx.font = `${w * 0.02}px Arial`;
-  ctx.fillText("W S : Select", cx(0.5), cy(0.85));
-  ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.92));
+  ctx.font = `${w * 0.03}px Arial`;
+  ctx.fillText("W S : Select", cx(0.5), cy(0.75));
+  ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.8));
 }
 
 // =====================
