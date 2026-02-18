@@ -1,13 +1,16 @@
+# Pong Game (Java)
+
+原初の対戦式テニスゲーム「Pong」を Java（Eclipse）で再現したシンプルなゲームです。  
+プレイヤーは左側のパドルを操作し、右側のパドルは CPU が自動で動きます。
+
+下のボタンをクリックすると、使用したコードを.js形式に変更したものです。
+キーボードで操作可能となっています。
 <p align="center">
   <a href="https://h-kwb.github.io/pong-game-java/" target="_blank">
     <img src="https://img.shields.io/badge/PLAY%20NOW-000000?style=for-the-badge&logo=github&logoColor=white" />
   </a>
 </p>
-
-# Pong Game (Java)
-
-原初の対戦式テニスゲーム「Pong」を Java（Eclipse）で再現したシンプルなゲームです。  
-プレイヤーは左側のパドルを操作し、右側のパドルは CPU が自動で動きます。
+是非プレイしてみてくださいね！
 
 ---
 

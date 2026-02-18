@@ -275,7 +275,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	// 難易度選択画面
 	public void drawDifficultyScreen(Graphics g) {
 		g.setFont(new Font("Arial", Font.BOLD, 40));
-		g.drawString("SELCT DIFFICULTY", 150, 150);
+		g.drawString("SELECT DIFFICULTY", 150, 150);
 		
 		g.setFont(new Font("Arial", Font.PLAIN, 30));
 		g.drawString("1 : EASY", 250, 250);
