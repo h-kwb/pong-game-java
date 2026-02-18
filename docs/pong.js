@@ -106,10 +106,10 @@ document.addEventListener("keydown", (e) => {
   if (gameState === PLAY && e.key === "s") sPressed = true;
 
   // ==== PAUSE =====
-  if (e.code === "p" && gameState === PLAY) {
+  if ((e.key === "p" || e.key === "P") && gameState === PLAY) {
     gameState = PAUSE;
   }
-  else if (e.code === "p" && gameState === PAUSE) {
+  else if ((e.key === "p" || e.key === "P") && gameState === PAUSE) {
     gameState = PLAY;
   }
 
