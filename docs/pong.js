@@ -465,7 +465,7 @@ function draw() {
 
 function drawTitle() {
   const w = canvas.width;
-  
+
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
 
@@ -479,31 +479,34 @@ function drawTitle() {
 function drawPause() {
   const w = canvas.width;
 
-  // 背景を少し暗く
   ctx.fillStyle = "rgba(0,0,0,0.6)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "white";
   ctx.textAlign = "center";
+
+  // タイトル
   ctx.font = `${w * 0.06}px Arial`;
   ctx.fillText("PAUSE", cx(0.5), cy(0.25));
 
-  ctx.font = `${w * 0.02}px Arial`;
+  // ===== メニューゾーン =====
+  ctx.font = `${w * 0.03}px Arial`;
 
   for (let i = 0; i < pauseMenu.length; i++) {
+    const y = 0.45 + i * 0.08; // ←間隔を少し詰めて上寄りに
 
     if (i === pauseMenuIndex) {
-      ctx.fillText("> " + pauseMenu[i], cx(0.5), cy(0.5 + i * 0.1));
+      ctx.fillText("> " + pauseMenu[i], cx(0.5), cy(y));
     } else {
-      ctx.fillText(pauseMenu[i], cx(0.5), cy(0.5 + i * 0.1));
+      ctx.fillText(pauseMenu[i], cx(0.5), cy(y));
     }
   }
 
+  // ===== 操作説明ゾーン =====
   ctx.font = `${w * 0.02}px Arial`;
-  ctx.fillText("W S : Select", cx(0.5), cy(0.6));
-  ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.6));
+  ctx.fillText("W S : Select", cx(0.5), cy(0.85));
+  ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.92));
 }
-
 
 // =====================
 // その他
