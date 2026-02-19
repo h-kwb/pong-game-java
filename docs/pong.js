@@ -443,9 +443,9 @@ function drawDifficulty() {
   ctx.fillText("SELECT DIFFICULTY", w / 2, h * 0.3);
 
   ctx.font = `${w * 0.04}px Arial`;
-  ctx.fillText("1 :   EASY", w / 2.25, h * 0.55);
-  ctx.fillText("2 : NORMAL", w / 2.25, h * 0.65);
-  ctx.fillText("3 :   HARD", w / 2.25, h * 0.75);
+  ctx.fillText("1 :\tEASY", w / 2.25, h * 0.55);
+  ctx.fillText("2 :\tNORMAL", w / 2.25, h * 0.65);
+  ctx.fillText("3 :\tHARD", w / 2.25, h * 0.75);
 }
 
 function draw() {
@@ -504,7 +504,7 @@ function drawPause() {
 
   // ===== 操作説明ゾーン =====
   ctx.font = `${w * 0.0225}px Arial`;
-  ctx.fillText("W S : Select", cx(0.5), cy(0.75));
+  ctx.fillText("W / S : Select", cx(0.5), cy(0.75));
   ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.8));
 }
 
