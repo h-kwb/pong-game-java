@@ -381,11 +381,15 @@ function checkCollision(paddle, isLeft) {
 // =====================
 function drawGame() {
   const w = canvas.width;
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
 
-  ctx.fillText(`Games: ${leftGames}`, cx(0.35), cy(0.15));
-  ctx.fillText(`Games: ${rightGames}`, cx(0.65), cy(0.15));
+  ctx.fillStyle = "white";
+
+  // Games score size small
+  ctx.textAlign = "center";
+  ctx.font = `${w * 0.025}px Arial`;
+
+  ctx.fillText(`Games: ${leftGames}`, cx(0.35), cy(0.12));
+  ctx.fillText(`Games: ${rightGames}`, cx(0.65), cy(0.12));
 
   // 中央線
   for (let i = 0; i < canvas.height; i += 30) {
@@ -410,7 +414,13 @@ function drawGame() {
       ctx.fillText("40", cx(0.4), cy(0.08));
       ctx.fillText("AD", cx(0.6), cy(0.08));
     } else {
+      ctx.save();
+      ctx.globalAlpha = 0.4;
+      ctx.font = `bold ${w * 0.045}px Arial`;
+
       ctx.fillText("DEUCE", cx(0.5), cy(0.08));
+
+      ctx.restore()
     }
   } else {
     ctx.fillText(tennisScores[leftScoreIndex], cx(0.4), cy(0.08));
@@ -436,16 +446,20 @@ function drawDifficulty() {
   const h = canvas.height;
 
   ctx.fillStyle = "white";
-  ctx.textAlign = "center";
-
+  
   // title
+  ctx.textAlign = "center";
   ctx.font = `${w * 0.06}px Arial`;
   ctx.fillText("SELECT DIFFICULTY", w / 2, h * 0.3);
 
+  // menu
+  ctx.textAlign = "left";
+  const blockWidth = 200;
+  const startX = w / 2 - blockWidth / 2;
   ctx.font = `${w * 0.04}px Arial`;
-  ctx.fillText("1 :\tEASY", w / 2.25, h * 0.55);
-  ctx.fillText("2 :\tNORMAL", w / 2.25, h * 0.65);
-  ctx.fillText("3 :\tHARD", w / 2.25, h * 0.75);
+  ctx.fillText("1 : EASY", startX, h * 0.55);
+  ctx.fillText("2 : NORMAL", startX, h * 0.65);
+  ctx.fillText("3 : HARD", startX, h * 0.75);
 }
 
 function draw() {
@@ -490,22 +504,25 @@ function drawPause() {
   ctx.fillText("PAUSE", cx(0.5), cy(0.25));
 
   // ===== メニューゾーン =====
+  ctx.textAlign = "left";
+  const blockWidth = 200;
+  const startX = w / 2 - blockWidth / 2;
   ctx.font = `${w * 0.03}px Arial`;
 
   for (let i = 0; i < pauseMenu.length; i++) {
     const y = 0.45 + i * 0.08; // ←間隔を少し詰めて上寄りに
 
     if (i === pauseMenuIndex) {
-      ctx.fillText("> " + pauseMenu[i], cx(0.5), cy(y));
+      ctx.fillText("> " + pauseMenu[i], startX, cy(y));
     } else {
-      ctx.fillText(pauseMenu[i], cx(0.5), cy(y));
+      ctx.fillText(pauseMenu[i], startX, cy(y));
     }
   }
 
   // ===== 操作説明ゾーン =====
   ctx.font = `${w * 0.0225}px Arial`;
-  ctx.fillText("W / S : Select", cx(0.5), cy(0.75));
-  ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.8));
+  ctx.fillText("W / S : Select", startX, cy(0.75));
+  ctx.fillText("ENTER : Confirm", startX, cy(0.8));
 }
 
 // =====================
