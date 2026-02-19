@@ -60,8 +60,8 @@ let server = 1;
 let pauseMenuIndex = 0;
 
 const pauseMenu = [
-  "RESUME     ",
-  "RESET MATCH"
+  "\tRESUME",
+  "\tRESET"
 ];
 
 // =====================
@@ -443,9 +443,9 @@ function drawDifficulty() {
   ctx.fillText("SELECT DIFFICULTY", w / 2, h * 0.3);
 
   ctx.font = `${w * 0.04}px Arial`;
-  ctx.fillText("1 : EASY",   w / 2.25, h * 0.55);
-  ctx.fillText("2 : NORMAL", w / 2, h * 0.65);
-  ctx.fillText("3 : HARD",   w / 2.25, h * 0.75);
+  ctx.fillText("1 :   EASY", w / 2.25, h * 0.55);
+  ctx.fillText("2 : NORMAL", w / 2.25, h * 0.65);
+  ctx.fillText("3 :   HARD", w / 2.25, h * 0.75);
 }
 
 function draw() {
