@@ -71,8 +71,8 @@ class Paddle {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.width = 20;
-    this.height = 100;
+    this.width = canvas.width * 0.015;
+    this.height = canvas.height * 0.12;
   }
 
   draw() {
@@ -368,7 +368,7 @@ function checkCollision(paddle, isLeft) {
     let distance = ballCenter - paddleCenter;
     let normalized = distance / (p.h / 2);
 
-    ballYSpeed = normalized * 5;
+    ballYSpeed = normalized * 4;
 
     if (Math.abs(ballXSpeed) < MAX_SPEED) {
       ballXSpeed *= 1.4; 
