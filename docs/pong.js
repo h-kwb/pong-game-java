@@ -408,15 +408,14 @@ function drawGame() {
   // ★ デュース・アドバンテージ表示
   if (leftScoreIndex === 3 && rightScoreIndex === 3) {
     if (advantage === 1) {
-      ctx.fillText(tennisScores[leftScoreIndex], cx(0.4), cy(0.08));
-      ctx.fillText(tennisScores[rightScoreIndex], cx(0.6), cy(0.08));
+      ctx.fillText("AD", cx(0.4), cy(0.08));
+      ctx.fillText("40", cx(0.6), cy(0.08));
     } else if (advantage === 2) {
       ctx.fillText("40", cx(0.4), cy(0.08));
       ctx.fillText("AD", cx(0.6), cy(0.08));
     } else {
       ctx.save();
       ctx.globalAlpha = 0.4;
-      ctx.font = `bold ${w * 0.045}px Arial`;
 
       ctx.fillText("DEUCE", cx(0.5), cy(0.08));
 
