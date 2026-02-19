@@ -60,7 +60,7 @@ let server = 1;
 let pauseMenuIndex = 0;
 
 const pauseMenu = [
-  "RESUME",
+  "RESUME     ",
   "RESET MATCH"
 ];
 
@@ -503,7 +503,7 @@ function drawPause() {
   }
 
   // ===== 操作説明ゾーン =====
-  ctx.font = `${w * 0.025}px Arial`;
+  ctx.font = `${w * 0.0225}px Arial`;
   ctx.fillText("W S : Select", cx(0.5), cy(0.75));
   ctx.fillText("ENTER : Confirm", cx(0.5), cy(0.8));
 }
